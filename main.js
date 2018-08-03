@@ -2,6 +2,8 @@ const botSettings = require("./botsettings.json");
 const prefix = botSettings.prefix;
 const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone: true});
+const ytdl = require('ytdl-core');
+const streamOptions = { seek: 0, volume: 1 };
 
 bot.on("message", async message => {
 	if(message.author.bot) return;
@@ -26,9 +28,31 @@ bot.on("message", async message => {
 		return;
 	}
 
-	if(message.content == "ping"){
+	if(command === `${prefix}join`){
+		if (message.member.voiceChannel) {
+      		message.member.voiceChannel.join()
+        		.then(connection => { // Connection is an instance of VoiceConnection
+          			message.reply('Connected');
+          			const stream = ytdl('https://www.youtube.com/watch?v=7ODcC5z6Ca0', { filter : 'audioonly' });
+    				const dispatcher = connection.playStream(stream, streamOptions);
+        		})
+        		.catch(console.error);
+
+    	} else {
+      		message.reply('You need to join a voice channel first!');
+    	}
+	}
+
+	if(command === `${prefix}leave`){
+		if (message.member.voiceChannel) {
+      		message.member.voiceChannel.leave()
+    	} else {
+      		message.reply('You need to join a voice channel first!');
+    	}
+	}
+
+	if(command === `${prefix}ping`){
 		message.reply('pong');
-		//message.channel.send("OH MY WHAT ROBIN?!?!?!");
 	}
 });
 

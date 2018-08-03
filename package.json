@@ -1,0 +1,31 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "bufferutil": "^4.0.0",
+    "discord": "^0.8.2",
+    "discord.js": "^11.3.2",
+    "erlpack": "^0.1.2",
+    "ffmpeg-binaries": "^4.0.0",
+    "node-opus": "^0.3.0",
+    "opusscript": "0.0.6",
+    "uws": "^99.0.0",
+    "ytdl-core": "^0.23.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavanjando/Discord-Bot.git"
+  },
+  "author": "Pavan Jando",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pavanjando/Discord-Bot/issues"
+  },
+  "homepage": "https://github.com/pavanjando/Discord-Bot#readme"
+}
