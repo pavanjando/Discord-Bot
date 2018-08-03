@@ -33,7 +33,7 @@ bot.on("message", async message => {
       		message.member.voiceChannel.join()
         		.then(connection => { // Connection is an instance of VoiceConnection
           			message.reply('Connected');
-          			const stream = ytdl('https://www.youtube.com/watch?v=7ODcC5z6Ca0', { filter : 'audioonly' });
+          			const stream = ytdl('https://www.youtube.com/watch?v=6fB8QiPTadY', { filter : 'audioonly' });
     				const dispatcher = connection.playStream(stream, streamOptions);
         		})
         		.catch(console.error);
