@@ -1,8 +1,8 @@
 const botSettings = require("./botsettings.json");
-const prefix = botSettings.prefix;
 const Discord = require("discord.js");
-const bot = new Discord.Client({disableEveryone: true});
 const ytdl = require('ytdl-core');
+const prefix = botSettings.prefix;
+const bot = new Discord.Client({disableEveryone: true});
 const streamOptions = { seek: 0, volume: 1 };
 
 bot.on("message", async message => {
@@ -28,8 +28,8 @@ bot.on("message", async message => {
 		return;
 	}
 
-	if(command === `${prefix}join`){
-		if (message.member.voiceChannel) {
+	if (message.member.voiceChannel) {
+		if(command === `${prefix}join`){
       		message.member.voiceChannel.join()
         		.then(connection => { // Connection is an instance of VoiceConnection
           			message.reply('Connected');
@@ -37,19 +37,19 @@ bot.on("message", async message => {
     				const dispatcher = connection.playStream(stream, streamOptions);
         		})
         		.catch(console.error);
-
-    	} else {
-      		message.reply('You need to join a voice channel first!');
+    	} else if(command === `${prefix}leave`){
+    		message.member.voiceChannel.leave()
+    	} else if(command === `${prefix}play`){
+    		message.member.voiceChannel.join()
+        		.then(connection => {
+          			const stream = ytdl(args.toString(), { filter : 'audioonly' });
+    				const dispatcher = connection.playStream(stream, streamOptions);
+        		})
+        		.catch(console.error);
     	}
-	}
-
-	if(command === `${prefix}leave`){
-		if (message.member.voiceChannel) {
-      		message.member.voiceChannel.leave()
-    	} else {
-      		message.reply('You need to join a voice channel first!');
-    	}
-	}
+	} else {
+      	message.reply('You need to join a voice channel first!');
+    }
 
 	if(command === `${prefix}ping`){
 		message.reply('pong');
